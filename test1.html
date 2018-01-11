@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<script>
+			let myPromise = new Promise((resolve, reject) => {
+
+				//simulate async stuff using setTimeout
+				window.setTimeout(function() {
+					resolve({name: 'saeid'});
+				}, 1000);
+
+				//reject('manually rejected');
+			});
+
+			myPromise.then((data) => {
+				console.log('myPromise is now resolved! ', data);
+			});
+
+			myPromise.catch((error) => {
+				console.log('myPromise is now rejected! ', error);
+			});
+
+			console.log('myPromise is pending...', myPromise);
+		</script>
+	</head>
+	<body>
+		<p>Hello World</p>
+	</body>
+</html>
