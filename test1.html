@@ -1,12 +1,21 @@
 <html>
 	<head>
-		<script>
+		<title>promise demo</title>
+	</head>
+	<body>
+		<p>Hello World</p>
+		<script type="module">
+			import {ajaxGet} from './ajax.js';
+
+
+
 			let myPromise = new Promise((resolve, reject) => {
 
-				//simulate async stuff using setTimeout
-				window.setTimeout(function() {
+				//do something async here
+				ajaxGet('seo.json').then(function() {
+					console.log('got json...');
 					resolve({name: 'saeid'});
-				}, 1000);
+				});
 
 				//reject('manually rejected');
 			});
@@ -21,8 +30,5 @@
 
 			console.log('myPromise is pending...', myPromise);
 		</script>
-	</head>
-	<body>
-		<p>Hello World</p>
 	</body>
 </html>
