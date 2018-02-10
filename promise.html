@@ -1,0 +1,73 @@
+<html>
+	<head>
+		<title>Promise</title>
+	</head>
+	<body>
+		<h1>Promise demo</h1>
+		<p>See console...</p>
+		<script type="module">
+			import {ajaxGet} from './ajax.js';
+
+			let p1 = new Promise((resolve, reject) => {
+				console.log('p1 fn');
+
+				//do something async here
+				ajaxGet('seo.json').then(function(data) {
+					console.log('got first json');
+					resolve(data);
+				});
+
+				//reject('manually rejected');
+			});
+
+			p1.then((data) => {
+				console.log('p1 is now resolved! ', data);
+			}).catch((error) => {
+				console.log('p1 is now rejected! ', error);
+			});
+
+			let p2 = new Promise((resolve, reject) => {
+				console.log('p2 fn');
+
+				//do something async here
+				ajaxGet('autocomplete.json').then(function(data) {
+					console.log('got second json');
+					resolve(data);
+				});
+
+				//reject('manually rejected');
+			});
+
+			p2.then((data) => {
+				console.log('p2 is now resolved! ', data);
+			}).catch((error) => {
+				console.log('p2 is now rejected! ', error);
+			});
+
+			let p3 = new Promise((resolve, reject) => {
+				console.log('p3 fn');
+
+				setTimeout(function() {
+					console.log('p3 is done...');
+					resolve('hello world');
+				}, 1000);
+
+				//reject('manually rejected');
+			});
+
+			p3.then((data) => {
+				console.log('p3 is now resolved! ', data);
+			}).catch((error) => {
+				console.log('p3 is now rejected! ', error);
+			});
+
+			Promise.all([p1, p3, p2]).then(function(values) {
+					console.log('all promises are resolved now!', values);
+				}).catch(function(error) {
+					console.log('promise all is rejected. Error: ', error);
+				});
+
+			console.log('all promises are pending...', p1, p2, p3);
+		</script>
+	</body>
+</html>
